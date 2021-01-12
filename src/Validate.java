@@ -12,4 +12,13 @@ public class Validate {
             return false;
     }
 
+    public Boolean validateInput(String inputString)
+    {
+        if(inputString.length()>1 || inputString.isEmpty())
+            return false;
+        else if(inputString.charAt(0)<='0' && inputString.charAt(0)>'9')
+            return false;
+        return true;
+    }
+
 }
