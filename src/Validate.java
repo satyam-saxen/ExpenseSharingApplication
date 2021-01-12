@@ -24,7 +24,6 @@ public class Validate {
     public static Boolean validateRegistration(String newUser){
         System.out.println(newUser);
         String []userDetails = newUser.split(",");
-        System.out.println(userDetails.length);
         if(userDetails.length != 2)
             return false;
         if(userDetails[1].length() != 10)

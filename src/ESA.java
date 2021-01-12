@@ -1,4 +1,5 @@
 import java.lang.reflect.MalformedParameterizedTypeException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ESA {
@@ -19,11 +20,32 @@ public class ESA {
 
             Scanner scanner = new Scanner(System.in);
             String action = scanner.next();
-            if(Validate.validateInput(action)){
-                if(action.charAt(0) == '9'){
+            if(Validate.validateAction(action)){
+                char actionMode = action.charAt(0);
+                if(actionMode == '9'){
                     appRun = false;
                 }else{
                     //perform action
+                    if(actionMode == '1'){
+                        System.out.println("To register a new user, please provide their name & phone number separated by a comma");
+                        String newUser = "Satyam,8865011413";
+                        if(Validate.validateRegistration(newUser)){
+
+                        }else{
+                            System.out.println("Something wrong");
+                        }
+
+                    }else if(actionMode == '2'){
+                        Map<String, User> users = UserDatabase.getUsers();
+                        if(users.isEmpty()){
+                            System.out.println("No User Register yet");
+                        }else{
+                            for(int user=0;user<users.size();user++)
+                            {
+                                System.out.println(users.get("8865011413").getName());
+                            }
+                        }
+                    }
                 }
             }else{
                 System.out.println("Invalid action, please try again !!");
