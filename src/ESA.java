@@ -1,6 +1,8 @@
+import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.Scanner;
 
 public class ESA {
+
     public void run(){
         Boolean appRun = true;
         do{
@@ -16,13 +18,18 @@ public class ESA {
             System.out.println("9. Exit the application");
 
             Scanner scanner = new Scanner(System.in);
-            int action = scanner.nextInt();
-            if(action == 9)
-            {
-                appRun = false;
+            String action = scanner.next();
+            if(Validate.validateInput(action)){
+                if(action.charAt(0) == '9'){
+                    appRun = false;
+                }else{
+                    //perform action
+                }
             }else{
-                //Do some action
+                System.out.println("Invalid action, please try again !!");
             }
+            System.out.println();
+
         }while(appRun);
     }
 }
