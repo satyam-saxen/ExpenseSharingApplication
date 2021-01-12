@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        //main class
+        ESA esa = new ESA();
+        esa.run();
     }
 }
