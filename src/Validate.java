@@ -12,7 +12,7 @@ public class Validate {
             return false;
     }
 
-    public Boolean validateInput(String inputString)
+    public static Boolean validateInput(String inputString)
     {
         if(inputString.length()>1 || inputString.isEmpty())
             return false;
