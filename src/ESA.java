@@ -9,6 +9,7 @@ public class ESA {
     Menu menu = new Menu();
     Printable printer = new ConsolePrinter();
     UserAction userAction = new UserAction();
+    ExpenseAction expenseAction = new ExpenseAction();
     String error = "Some error occured, please try again";
     public void run(){
 
@@ -39,6 +40,7 @@ public class ESA {
                 userAction.updateUser();
                 break;
             case '4':
+                expenseAction.addExpense();
                 break;
             case '5':
                 break;
