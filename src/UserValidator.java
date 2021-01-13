@@ -19,10 +19,12 @@ public class UserValidator implements Validator{
 
     public static Boolean validateUser(String phone)
     {
-        Map<String,User> users =  UserDatabase.getUsers();
-        if(users.containsKey(phone))
-            return true;
-        else
-            return false;
+        Map<Integer,User> users =  UserDatabase.getUsers();
+        for(User user : users.values()){
+            if(user.getPhoneNumber() == phone){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,5 +1,5 @@
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String phoneNumber;
 
@@ -9,7 +9,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

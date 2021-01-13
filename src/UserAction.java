@@ -12,8 +12,7 @@ public class UserAction {
         String userInfo = scanner.nextLine();
         if(userValidator.validate(userInfo)){
             String []userDetails = userInfo.split(",");
-            UserDatabase.addUserInDatabase(new User(userDetails[0],userDetails[1]));
-            int id = UserDatabase.getUsers().get(userDetails[1]).getId();
+            Integer id = UserDatabase.addUserInDatabase(new User(userDetails[0],userDetails[1]));
             printer.print("User "+userDetails[0] + " registered with id "+id);
         }else{
             printer.print(error);
@@ -22,7 +21,7 @@ public class UserAction {
     }
 
     public void displayAllUser(){
-        Map<String, User> users = UserDatabase.getUsers();
+        Map<Integer, User> users = UserDatabase.getUsers();
         if(users.isEmpty()){
             printer.print(error);
         }else{
@@ -38,11 +37,13 @@ public class UserAction {
         User user = UserDatabase.findUserById(id);
         if(user != null){
             printer.print("Please enter new details");
-            String updatedInfo = scanner.nextLine();
+            String updatedInfo = "";
+            scanner.nextLine();
+            updatedInfo = scanner.nextLine();
             if(userValidator.validate(updatedInfo)){
                 String []userDetails = updatedInfo.split(",");
                 UserDatabase.updateUserInDatabase(user,userDetails);
-                printer.print("User "+userDetails[0] + " registered with id "+id);
+                printer.print("User "+userDetails[0] + " updated");
             }else{
                 printer.print(error);
             }
