@@ -7,4 +7,17 @@ public class InputValidator implements Validator{
             return false;
         return true;
     }
+
+    public Boolean validateDesc(String desc)
+    {
+        if(desc.length()>0)
+            return true;
+        return false;
+    }
+
+    public Boolean validateCost(Double cost)
+    {
+        return cost>=0 ? true : false;
+    }
+
 }
