@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ExpenseAction {
@@ -36,6 +38,15 @@ public class ExpenseAction {
         User payer = UserDatabase.findUserById(Integer.parseInt(payerId));
         Expenditure expenditure = new Expenditure(desc,cost,users,payer);
         ExpenseDatabase.addExpenditureInDatabase(expenditure);
-        
+
     }
+
+    public void displayAllExpenditure(){
+        Map<Integer,Expenditure> expenditures = ExpenseDatabase.getExpenditures();
+        if(!expenditures.isEmpty()){
+            printer.print("List of expenses is following :-");
+            expenditures.forEach((k,v)-> printer.print(v.getDesc()+ " " + v.getCost()));
+        }
+    }
+
 }
