@@ -1,14 +1,12 @@
 public class User {
-    private static int unique_number=1;
     private int id;
     private String name;
     private String phoneNumber;
 
     public User(String name, String phoneNumber) {
-        this.id = unique_number;
+        this.id = UserIdGenerator.getUniqueId();
         this.name = name;
         this.phoneNumber = phoneNumber;
-        unique_number++;
     }
 
     public int getId() {

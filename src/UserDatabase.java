@@ -11,4 +11,18 @@ public class UserDatabase {
     public static Map<String, User> getUsers(){
         return users;
     }
+
+    public static User findUserById(int id){
+        for(User user : users.values()){
+            if(user.getId() == id){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public static void updateUserInDatabase(User user,String []updatedInfo){
+//        User updatedUser = new User(updatedInfo[0])
+        users.get(updatedInfo[1]).setName(updatedInfo[0]);
+    }
 }
