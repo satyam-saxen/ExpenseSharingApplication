@@ -43,6 +43,7 @@ public class ESA {
                 expenseAction.addExpense();
                 break;
             case '5':
+                expenseAction.displayAllExpenditure();
                 break;
             case '6':
                 break;
