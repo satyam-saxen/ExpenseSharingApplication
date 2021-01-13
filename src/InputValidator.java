@@ -33,4 +33,13 @@ public class InputValidator implements Validator{
         return flag;
     }
 
+    public Boolean validatePayer(String payerId){
+        if(payerId.length() == 0)
+            return false;
+        User user = UserDatabase.findUserById(Integer.parseInt(payerId));
+        if(user == null)
+            return false;
+        return true;
+    }
+
 }
