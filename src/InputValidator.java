@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class InputValidator implements Validator{
 
     public Boolean validate(String action){
@@ -18,7 +20,7 @@ public class InputValidator implements Validator{
         return cost>=0 ? true : false;
     }
 
-    public Boolean validateExpenseUsers(String expenseUsers){
+    public Boolean validateExpenseUsers(String expenseUsers, ArrayList<User> users){
         if(expenseUsers.length() == 0)
             return false;
         String []userIds = expenseUsers.split(",");
@@ -29,6 +31,7 @@ public class InputValidator implements Validator{
                 flag = false;
                 break;
             }
+            users.add(user);
         }
         return flag;
     }
