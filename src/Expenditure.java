@@ -3,12 +3,14 @@ import java.util.ArrayList;
 public class Expenditure {
     private Integer id;
     private String desc;
+    private double cost;
     private ArrayList<User> expenseUsers;
     private User payer;
 
-    public Expenditure(String desc, ArrayList<User> expenseUsers, User payer) {
+    public Expenditure(String desc, double cost, ArrayList<User> expenseUsers, User payer) {
         this.id = ExpenseIdGenerator.getUniqueId();
         this.desc = desc;
+        this.cost = cost;
         this.expenseUsers = expenseUsers;
         this.payer = payer;
     }
@@ -19,6 +21,14 @@ public class Expenditure {
 
     public String getDesc() {
         return desc;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public ArrayList<User> getExpenseUsers() {
