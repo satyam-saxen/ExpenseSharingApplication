@@ -1,60 +1,32 @@
-import services.impl.ExpenseServiceImpl;
-import services.impl.UserServiceImpl;
+import commands.CommandResponse;
+import commands.InputCommand;
+import io.Reader;
+import io.impl.ConsolePrinter;
+import io.InputParser;
+import io.Printable;
+import io.impl.ConsoleReader;
+import services.InputCommandProcessor;
 
 public class ESA {
 
     Boolean appRun = true;
-    Validator inputValidator = new InputValidator();
-    Menu menu = new Menu();
     Printable printer = new ConsolePrinter();
-    UserServiceImpl userServiceImpl = new UserServiceImpl();
-    ExpenseServiceImpl expenseServiceImpl = new ExpenseServiceImpl();
-    String error = "Some error occured, please try again";
+    InputParser inputParser;
+    Reader reader = new ConsoleReader();
+    InputCommand inputCommand;
+    CommandResponse commandResponse;
+    InputCommandProcessor inputCommandProcessor;
     public void run(){
 
         do{
-            String availabelOptions = menu.getMenu();
-            printer.print(availabelOptions);
-            String action = menu.getAction();
-            if(inputValidator.validate(action)){
-                char actionMode = action.charAt(0);
-                performAction(actionMode);
-            }else{
-                printer.print(error);
-            }
-            printer.print("");
-
-        }while(appRun);
-    }
-
-    private void performAction(char action){
-        switch (action){
-            case '1':
-//                userServiceImpl.registerUser();
-                break;
-            case '2':
-//                userServiceImpl.displayAllUser();
-                break;
-            case '3':
-//                userServiceImpl.updateUser();
-                break;
-            case '4':
-//                expenseServiceImpl.addExpense();
-                break;
-            case '5':
-                expenseServiceImpl.displayAllExpenditure();
-                break;
-            case '6':
-                break;
-            case '7':
-                break;
-            case '8':
-                break;
-            case '9':
+            String inputString = reader.read();
+            inputCommand = inputParser.parseInput(inputString);
+            commandResponse = inputCommandProcessor.processInputCommand(inputCommand);
+            printer.print(commandResponse.getResponseDescription());
+            if(!commandResponse.getStatus() && commandResponse.getResponseDescription().equals("Process exit successfully")){
                 appRun = false;
-                break;
-
-        }
+            }
+        }while(appRun);
     }
 
 }

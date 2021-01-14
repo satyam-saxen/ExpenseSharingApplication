@@ -35,10 +35,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.getUserById(id);
     }
 
+
     @Override
-    public Optional<User> updateUser(Integer id, String name, String phoneNumber) {
-        if(userDataValidator.validateName(name) && userDataValidator.validatePhoneNumber(phoneNumber)){
-            return userRepository.updateUser(id,name,phoneNumber);
+    public Optional<User> updateUser(String id, String name, String phoneNumber) {
+        if(userDataValidator.validateName(name) && userDataValidator.validatePhoneNumber(phoneNumber)
+          && userDataValidator.validateId(id)){
+            return userRepository.updateUser(Integer.parseInt(id),name,phoneNumber);
         }
         return Optional.empty();
     }

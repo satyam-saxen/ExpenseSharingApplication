@@ -10,5 +10,5 @@ public interface UserService {
     Map<Integer, User> getAllUsers();
 
     Optional<User> getUserById(Integer id);
-    Optional<User> updateUser(Integer id,String name,String phone);
+    Optional<User> updateUser(String id,String name,String phone);
 }

@@ -22,10 +22,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     ExpenseRepository expenseRepository;
 
     @Override
-    public Integer addExpense(String desc, double cost, String[] expenseUserIds, String payerId) {
+    public Integer addExpense(String desc, String cost, String[] expenseUserIds, String payerId) {
         if(expenseDataValidator.validateDesc(desc) && expenseDataValidator.validateCost(cost) &&
             expenseDataValidator.validateExpenseUserIds(expenseUserIds) && expenseDataValidator.validatePayerId(payerId)){
-            Integer generatedId = getUsersFromDatabase(desc, cost, expenseUserIds, payerId);
+            Integer generatedId = getUsersFromDatabase(desc, Double.valueOf(cost), expenseUserIds, payerId);
             if (generatedId != null) return generatedId;
 
         }

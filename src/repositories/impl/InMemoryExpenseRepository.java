@@ -37,7 +37,7 @@ public class InMemoryExpenseRepository implements ExpenseRepository {
     @Override
     public Boolean deleteExpenditureById(Integer id) {
         Optional<Expenditure> maybeExitingExpenditure = getExpenditureById(id);
-        if(maybeExitingExpenditure.isPresent()){
+        if(maybeExitingExpenditure.isPresent()){//use map
             Expenditure existingExpenditure = maybeExitingExpenditure.get();
             Expenditure isSuccessfullyDeleted = expenditures.remove(existingExpenditure.getId());
             if(isSuccessfullyDeleted.getId() == null){

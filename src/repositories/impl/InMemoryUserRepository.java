@@ -11,10 +11,12 @@ public class InMemoryUserRepository implements UserRepository {
 
 
     @Override
-    public void addUserInDatabase(User user) {
+    public Boolean addUserInDatabase(User user) {
         users.put(user.getId(),user);
+        return users.containsKey(user.getId());
     }
 
+    @Override
     public Map<Integer, User> getAllUsers(){
         return users;
     }

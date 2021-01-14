@@ -20,4 +20,15 @@ public class UserDataValidator {
         }
         return phoneNumberValidation;
     }
+
+    public Boolean validateId(String id){
+        Boolean isValid = true;
+        for(int digit=0;digit<id.length();digit++){
+            if(id.charAt(digit)<'0' && id.charAt(digit)>'9'){
+                isValid = false;
+                break;
+            }
+        }
+        return isValid;
+    }
 }
