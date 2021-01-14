@@ -21,16 +21,17 @@ public class InputCommandProcessor {
         if(inputCommand instanceof AddUser){
             AddUser addUser = (AddUser)inputCommand;
             Integer id = userService.registerUser(addUser.getName(),addUser.getPhoneNumber());
-            return outputParser.parseOutput(userService.getUserById(id));
+            return outputParser.parseOutput(userService.getUserById(id).get());
         }else if(inputCommand instanceof DisplayUser){
             return outputParser.parseOutput(userService.getAllUsers());
         }else if(inputCommand instanceof EditUser){
             EditUser editUser = (EditUser)inputCommand;
             Optional<User> updatedUser = userService.updateUser(editUser.getId(), editUser.getName(), editUser.getPhoneNumber());
-            return outputParser.parseOutput(updatedUser);
+            return outputParser.parseOutput(updatedUser.get());
         }else if(inputCommand instanceof AddExpense) {
             AddExpense addExpense = (AddExpense)inputCommand;
-            expenseService.addExpense(addExpense.getDesc(),addExpense.getCost(),addExpense.getExpenseUsers(),addExpense.getPayer());
+            Integer id = expenseService.addExpense(addExpense.getDesc(), addExpense.getCost(), addExpense.getExpenseUsers(), addExpense.getPayer());
+            return outputParser.parseOutput(expenseService.getExpenseById(id));
         }else if(inputCommand instanceof DisplayAllExpense){
             expenseService.displayAllExpenditure();
         }else if(inputCommand instanceof EditExpense){

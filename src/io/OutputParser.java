@@ -1,6 +1,7 @@
 package io;
 
 import commands.CommandResponse;
+import models.Expenditure;
 import models.User;
 
 import java.util.Map;
@@ -24,11 +25,23 @@ public class OutputParser {
         commandResponse.setResponseDescription(outputString);
         return commandResponse;
     }
-    public CommandResponse parseOutput(Optional<User> user){
+    public CommandResponse parseOutput(User user){
         String outputString = "";
-        if(user.isPresent()){
-            User u = user.get();
-            outputString += u.getId().toString() + " " + u.getName() + " " + u.getPhoneNumber() + "\n";
+        if(user != null){
+            outputString += user.getId().toString() + " " + user.getName() + " " + user.getPhoneNumber() + "\n";
+        }else{
+            outputString += "Error";
+        }
+        commandResponse.setStatus(true);
+        commandResponse.setResponseDescription(outputString);
+        return commandResponse;
+    }
+
+    public CommandResponse parseOutput(Optional<Expenditure> maybeExpenditure){
+        String outputString = "";
+        if(maybeExpenditure.isPresent()){
+            Expenditure expenditure = maybeExpenditure.get();
+            outputString += expenditure.getId().toString() + " " + expenditure.getDesc() + " " + expenditure.getCost() +"\n";
         }else{
             outputString += "Error";
         }

@@ -21,8 +21,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     UserService userService = new UserServiceImpl();
     DebtService debtService = new DebtServiceImpl();
-    ExpenseDataValidator expenseDataValidator;
+    ExpenseDataValidator expenseDataValidator = new ExpenseDataValidator();
     ExpenseRepository expenseRepository;
+
+    {
+        expenseRepository = new InMemoryExpenseRepository();
+    }
 
     @Override
     public Integer addExpense(String desc, String cost, String[] expenseUserIds, String payerId) {
@@ -68,6 +72,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     public Map<Integer,Expenditure> displayAllExpenditure(){
         return expenseRepository.getAllExpenditures();
+    }
+
+    @Override
+    public Optional<Expenditure> getExpenseById(Integer id) {
+        return expenseRepository.getExpenditureById(id);
     }
 
     @Override

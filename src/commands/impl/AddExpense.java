@@ -24,7 +24,14 @@ public class AddExpense implements InputCommand {
     }
 
     public String[] getExpenseUsers() {
-        return expenseUsers;
+        int totalExpenseUsers = expenseUsers.length - 4;
+        String [] extractExpenseUsers = new String[totalExpenseUsers];
+        for(int index = expenseUsers.length-2;index>=0;index--){
+            extractExpenseUsers[--totalExpenseUsers] = expenseUsers[index];
+            if(totalExpenseUsers==0)
+                break;
+        }
+        return extractExpenseUsers;
     }
 
     public String getPayer() {
