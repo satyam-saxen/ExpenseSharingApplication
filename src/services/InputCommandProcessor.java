@@ -42,9 +42,11 @@ public class InputCommandProcessor {
         }else if(inputCommand instanceof DisplayAllDebts){
             return outputParser.parseOutputss(debtService.getAllDebt());
         }else if(inputCommand instanceof Exit){
-            return new CommandResponse("Terminated Successfully",false);
+            return new CommandResponse("Terminated Successfully",true);
         }
-        return null;
+
+        return new CommandResponse("Terminated Successfully",false);
+
     }
 
 }

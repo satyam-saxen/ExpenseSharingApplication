@@ -23,6 +23,6 @@ public class InputParser {
         }else if(inputCommandParts[0].equals("EXIT")){
             return new Exit();
         }
-        return null;
+        return new InvalidCommand();
     }
 }
