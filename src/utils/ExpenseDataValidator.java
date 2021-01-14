@@ -1,6 +1,17 @@
 package utils;
 
 public class ExpenseDataValidator {
+    public Boolean validateId(String id){
+        Boolean isValid = true;
+        for(int digit=0;digit<id.length();digit++){
+            if(id.charAt(digit)<'0' && id.charAt(digit)>'9'){
+                isValid = false;
+                break;
+            }
+        }
+        return isValid;
+    }
+
     public Boolean validateDesc(String desc){
         return desc.length()>0;
     }

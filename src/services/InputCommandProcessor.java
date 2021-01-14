@@ -3,6 +3,7 @@ package services;
 import commands.CommandResponse;
 import commands.InputCommand;
 import commands.impl.*;
+import models.Expenditure;
 import services.impl.UserServiceImpl;
 
 public class InputCommandProcessor {
@@ -35,6 +36,9 @@ public class InputCommandProcessor {
             expenseService.addExpense(addExpense.getDesc(),addExpense.getCost(),addExpense.getExpenseUsers(),addExpense.getPayer());
         }else if(inputCommand instanceof DisplayAllExpense){
             expenseService.displayAllExpenditure();
+        }else if(inputCommand instanceof EditExpense){
+            EditExpense editExpense = (EditExpense)inputCommand;
+            Expenditure expenditure = expenseService.updateExpense(editExpense.getId(), editExpense.getDesc(), editExpense.getCost(), editExpense.getExpenseUsers(), editExpense.getPayer());
         }else if(inputCommand instanceof Exit){
             new CommandResponse("Process exit successfully",false);
         }

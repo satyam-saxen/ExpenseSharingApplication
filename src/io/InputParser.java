@@ -14,8 +14,10 @@ public class InputParser {
             return new EditUser(inputCommandParts[1],inputCommandParts[2],inputCommandParts[3]);
         }else if(inputCommandParts[0].equals("ADD_EXPENSE") && inputCommandParts.length >3){
             return new AddExpense(inputCommandParts[1],inputCommandParts[2],inputCommandParts,inputCommandParts[inputCommandParts.length-1]);
-        }else if(inputCommandParts[0].equals("DISPLAY_EXPENSE") && inputCommandParts.length==1){
+        }else if(inputCommandParts[0].equals("DISPLAY_EXPENSES") && inputCommandParts.length==1){
             return new DisplayAllExpense();
+        }else if(inputCommandParts[0].equals("EDIT_EXPENSE")){
+            return new EditExpense(inputCommandParts[1],inputCommandParts[2],inputCommandParts[3],inputCommandParts,inputCommandParts[inputCommandParts.length-1]);
         }else if(inputCommandParts[0].equals("EXIT")){
             return new Exit();
         }

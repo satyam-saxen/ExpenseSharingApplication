@@ -66,4 +66,13 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseRepository.getAllExpenditures();
     }
 
+    @Override
+    public Expenditure updateExpense(String id, String desc, String cost, String[] expenseUserIds, String payerId) {
+        if(expenseDataValidator.validateId(id) && expenseDataValidator.validateDesc(desc) && expenseDataValidator.validateCost(cost) &&
+                expenseDataValidator.validateExpenseUserIds(expenseUserIds) && expenseDataValidator.validatePayerId(payerId)){
+
+        }
+        return null;
+    }
+
 }
