@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InMemoryDebtRepository implements DebtRepository {
-    private Map<UserPair,Debt> AVAILABLE_DEBTS = new HashMap<>();
+    private static Map<UserPair,Debt> AVAILABLE_DEBTS = new HashMap<>();
 
     @Override
     public Boolean addDebtDetail(Debt debt) {

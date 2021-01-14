@@ -1,8 +1,10 @@
 package io;
 
 import commands.CommandResponse;
+import models.Debt;
 import models.Expenditure;
 import models.User;
+import models.UserPair;
 
 import java.util.Map;
 import java.util.Optional;
@@ -25,6 +27,36 @@ public class OutputParser {
         commandResponse.setResponseDescription(outputString);
         return commandResponse;
     }
+
+    public CommandResponse parseOutputs(Map<Integer,Expenditure> expenditures){
+        String outputString = "";
+        if(expenditures.isEmpty()){
+            outputString = "No expense added";
+        }else{
+            for(Expenditure expenditure:expenditures.values()){
+                outputString += expenditure.getId().toString() + " " + expenditure.getDesc() + " " + expenditure.getCost() +"\n";
+            }
+        }
+        commandResponse.setStatus(true);
+        commandResponse.setResponseDescription(outputString);
+        return commandResponse;
+    }
+
+    public CommandResponse parseOutputss(Map<UserPair, Debt> debts){
+        String outputString = "";
+        if(debts.isEmpty()){
+            outputString += "No expenditure added for showing debt record";
+        }else{
+            for(Debt debt: debts.values()){
+                outputString += debt.getUserPair().toString() + " " + debt.getCost() + "\n";
+            }
+        }
+        commandResponse.setStatus(true);
+        commandResponse.setResponseDescription(outputString);
+        return commandResponse;
+    }
+
+
     public CommandResponse parseOutput(User user){
         String outputString = "";
         if(user != null){

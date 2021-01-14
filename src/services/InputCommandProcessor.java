@@ -6,6 +6,7 @@ import commands.impl.*;
 import io.OutputParser;
 import models.Expenditure;
 import models.User;
+import services.impl.DebtServiceImpl;
 import services.impl.ExpenseServiceImpl;
 import services.impl.UserServiceImpl;
 
@@ -16,6 +17,7 @@ public class InputCommandProcessor {
     UserService userService = new UserServiceImpl();
     ExpenseService expenseService = new ExpenseServiceImpl();
     OutputParser outputParser = new OutputParser();
+    DebtService debtService = new DebtServiceImpl();
 
     public CommandResponse processInputCommand(InputCommand inputCommand){
         if(inputCommand instanceof AddUser){
@@ -33,10 +35,12 @@ public class InputCommandProcessor {
             Integer id = expenseService.addExpense(addExpense.getDesc(), addExpense.getCost(), addExpense.getExpenseUsers(), addExpense.getPayer());
             return outputParser.parseOutput(expenseService.getExpenseById(id));
         }else if(inputCommand instanceof DisplayAllExpense){
-            expenseService.displayAllExpenditure();
+            return outputParser.parseOutputs(expenseService.displayAllExpenditure());
         }else if(inputCommand instanceof EditExpense){
             EditExpense editExpense = (EditExpense)inputCommand;
             Expenditure expenditure = expenseService.updateExpense(editExpense.getId(), editExpense.getDesc(), editExpense.getCost(), editExpense.getExpenseUsers(), editExpense.getPayer());
+        }else if(inputCommand instanceof DisplayAllDebts){
+            return outputParser.parseOutputss(debtService.getAllDebt());
         }else if(inputCommand instanceof Exit){
             return new CommandResponse("Terminated Successfully",false);
         }

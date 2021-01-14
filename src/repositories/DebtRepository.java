@@ -6,10 +6,11 @@ import models.UserPair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public interface DebtRepository {
     Boolean addDebtDetail(Debt debt);
-    HashMap<UserPair,Debt> getAllDebt();
+    Map<UserPair,Debt> getAllDebt();
     Boolean getUserPair(User debtor,User owner);
     void updateDebtDetail(Debt debt);
     ArrayList<Debt> getDebtByDebtor(User debtor);

@@ -8,6 +8,7 @@ import repositories.impl.InMemoryDebtRepository;
 import services.DebtService;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DebtServiceImpl implements DebtService {
 
@@ -28,6 +29,11 @@ public class DebtServiceImpl implements DebtService {
             }
         }
         return null;
+    }
+
+    @Override
+    public Map<UserPair, Debt> getAllDebt() {
+        return debtRepository.getAllDebt();
     }
 
     private double getCostPerHead(double cost,int userCount){

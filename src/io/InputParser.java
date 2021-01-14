@@ -18,6 +18,8 @@ public class InputParser {
             return new DisplayAllExpense();
         }else if(inputCommandParts[0].equals("EDIT_EXPENSE")){
             return new EditExpense(inputCommandParts[1],inputCommandParts[2],inputCommandParts[3],inputCommandParts,inputCommandParts[inputCommandParts.length-1]);
+        }else if(inputCommandParts[0].equals("DISPLAY_DEBTS")){
+            return new DisplayAllDebts();
         }else if(inputCommandParts[0].equals("EXIT")){
             return new Exit();
         }
