@@ -1,3 +1,7 @@
+package utils.impl;
+
+import utils.Generator;
+
 public class UserIdGenerator implements Generator {
     private static int UNIQUE_ID = 0;
 

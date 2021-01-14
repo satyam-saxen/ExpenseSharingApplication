@@ -1,3 +1,5 @@
+package models;
+
 import java.util.ArrayList;
 
 public class Expenditure {
@@ -7,8 +9,8 @@ public class Expenditure {
     private ArrayList<User> expenseUsers;
     private User payer;
 
-    public Expenditure(String desc, double cost, ArrayList<User> expenseUsers, User payer) {
-        this.id = ExpenseIdGenerator.getUniqueId();
+    public Expenditure(Integer id,String desc, double cost, ArrayList<User> expenseUsers, User payer) {
+        this.id = id;
         this.desc = desc;
         this.cost = cost;
         this.expenseUsers = expenseUsers;

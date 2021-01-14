@@ -1,6 +1,5 @@
-import java.lang.reflect.MalformedParameterizedTypeException;
-import java.util.Map;
-import java.util.Scanner;
+import services.impl.ExpenseServiceImpl;
+import services.impl.UserServiceImpl;
 
 public class ESA {
 
@@ -8,8 +7,8 @@ public class ESA {
     Validator inputValidator = new InputValidator();
     Menu menu = new Menu();
     Printable printer = new ConsolePrinter();
-    UserAction userAction = new UserAction();
-    ExpenseAction expenseAction = new ExpenseAction();
+    UserServiceImpl userServiceImpl = new UserServiceImpl();
+    ExpenseServiceImpl expenseServiceImpl = new ExpenseServiceImpl();
     String error = "Some error occured, please try again";
     public void run(){
 
@@ -31,19 +30,19 @@ public class ESA {
     private void performAction(char action){
         switch (action){
             case '1':
-                userAction.registerUser();
+//                userServiceImpl.registerUser();
                 break;
             case '2':
-                userAction.displayAllUser();
+//                userServiceImpl.displayAllUser();
                 break;
             case '3':
-                userAction.updateUser();
+//                userServiceImpl.updateUser();
                 break;
             case '4':
-                expenseAction.addExpense();
+//                expenseServiceImpl.addExpense();
                 break;
             case '5':
-                expenseAction.displayAllExpenditure();
+                expenseServiceImpl.displayAllExpenditure();
                 break;
             case '6':
                 break;
