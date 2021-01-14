@@ -25,7 +25,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     public Integer addExpense(String desc, String cost, String[] expenseUserIds, String payerId) {
         if(expenseDataValidator.validateDesc(desc) && expenseDataValidator.validateCost(cost) &&
             expenseDataValidator.validateExpenseUserIds(expenseUserIds) && expenseDataValidator.validatePayerId(payerId)){
-            Integer generatedId = getUsersFromDatabase(desc, Double.valueOf(cost), expenseUserIds, payerId);
+            Integer generatedId = getUsersFromDatabase(desc, Double.parseDouble(cost), expenseUserIds, payerId);
             if (generatedId != null) return generatedId;
 
         }

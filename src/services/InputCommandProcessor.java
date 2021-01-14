@@ -4,12 +4,13 @@ import commands.CommandResponse;
 import commands.InputCommand;
 import commands.impl.*;
 import models.Expenditure;
+import services.impl.ExpenseServiceImpl;
 import services.impl.UserServiceImpl;
 
 public class InputCommandProcessor {
 
     UserService userService = new UserServiceImpl();
-    ExpenseService expenseService;
+    ExpenseService expenseService = new ExpenseServiceImpl();
     CommandResponse commandResponse;
 
     public CommandResponse processInputCommand(InputCommand inputCommand){
