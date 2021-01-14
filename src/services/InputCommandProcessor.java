@@ -3,35 +3,31 @@ package services;
 import commands.CommandResponse;
 import commands.InputCommand;
 import commands.impl.*;
+import io.OutputParser;
 import models.Expenditure;
+import models.User;
 import services.impl.ExpenseServiceImpl;
 import services.impl.UserServiceImpl;
+
+import java.util.Optional;
 
 public class InputCommandProcessor {
 
     UserService userService = new UserServiceImpl();
     ExpenseService expenseService = new ExpenseServiceImpl();
-    CommandResponse commandResponse;
+    OutputParser outputParser = new OutputParser();
 
     public CommandResponse processInputCommand(InputCommand inputCommand){
         if(inputCommand instanceof AddUser){
             AddUser addUser = (AddUser)inputCommand;
             Integer id = userService.registerUser(addUser.getName(),addUser.getPhoneNumber());
-            if(id == -1){
-                commandResponse.setResponseDescription("Error");
-                commandResponse.setStatus(false);
-            }
-            commandResponse.setResponseDescription("User "+addUser.getName() + " registered with id "+ id);
-            commandResponse.setStatus(true);
-            return commandResponse;
+            return outputParser.parseOutput(userService.getUserById(id));
         }else if(inputCommand instanceof DisplayUser){
-            DisplayUser displayUser = (DisplayUser)inputCommand;
-            userService.getAllUsers();//  ASK_THIS_ONE
-            commandResponse.setResponseDescription("");
-            commandResponse.setStatus(true);
+            return outputParser.parseOutput(userService.getAllUsers());
         }else if(inputCommand instanceof EditUser){
             EditUser editUser = (EditUser)inputCommand;
-            userService.updateUser(editUser.getId(),editUser.getName(),editUser.getPhoneNumber());
+            Optional<User> updatedUser = userService.updateUser(editUser.getId(), editUser.getName(), editUser.getPhoneNumber());
+            return outputParser.parseOutput(updatedUser);
         }else if(inputCommand instanceof AddExpense) {
             AddExpense addExpense = (AddExpense)inputCommand;
             expenseService.addExpense(addExpense.getDesc(),addExpense.getCost(),addExpense.getExpenseUsers(),addExpense.getPayer());
@@ -41,9 +37,9 @@ public class InputCommandProcessor {
             EditExpense editExpense = (EditExpense)inputCommand;
             Expenditure expenditure = expenseService.updateExpense(editExpense.getId(), editExpense.getDesc(), editExpense.getCost(), editExpense.getExpenseUsers(), editExpense.getPayer());
         }else if(inputCommand instanceof Exit){
-            new CommandResponse("Terminated Successfully",false);
+            return new CommandResponse("Terminated Successfully",false);
         }
-        return commandResponse;
+        return null;
     }
 
 }

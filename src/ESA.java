@@ -11,11 +11,11 @@ public class ESA {
 
     Boolean appRun = true;
     Printable printer = new ConsolePrinter();
-    InputParser inputParser;
+    InputParser inputParser = new InputParser();
     Reader reader = new ConsoleReader();
     InputCommand inputCommand;
     CommandResponse commandResponse;
-    InputCommandProcessor inputCommandProcessor;
+    InputCommandProcessor inputCommandProcessor = new InputCommandProcessor();
     public void run(){
 
         do{

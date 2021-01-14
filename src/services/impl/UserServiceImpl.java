@@ -2,6 +2,7 @@ package services.impl;
 
 import models.User;
 import repositories.UserRepository;
+import repositories.impl.InMemoryUserRepository;
 import services.UserService;
 import utils.UserDataValidator;
 import utils.impl.UserIdGenerator;
@@ -11,8 +12,8 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
-    UserDataValidator userDataValidator;
-    UserRepository userRepository;
+    UserDataValidator userDataValidator = new UserDataValidator();
+    UserRepository userRepository = new InMemoryUserRepository();
     @Override
     public Integer registerUser(String name, String phoneNumber) {
         if(!userDataValidator.validateName(name))
