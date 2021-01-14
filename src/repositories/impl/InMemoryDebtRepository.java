@@ -2,30 +2,40 @@ package repositories.impl;
 
 import models.Debt;
 import models.User;
+import models.UserPair;
 import repositories.DebtRepository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class InMemoryDebtRepository implements DebtRepository {
-    private ArrayList<Debt> AVAILABLE_DEBTS = new ArrayList<Debt>();
+    private Map<UserPair,Debt> AVAILABLE_DEBTS = new HashMap<>();
 
     @Override
     public Boolean addDebtDetail(Debt debt) {
-        return AVAILABLE_DEBTS.add(debt);
+        AVAILABLE_DEBTS.put(debt.getUserPair(),debt);
+        return AVAILABLE_DEBTS.containsKey(debt.getUserPair());
+    }
+
+    public void updateDebtDetail(Debt debt){
+        AVAILABLE_DEBTS.get(debt.getUserPair()).setCost(debt.getCost());
     }
 
     @Override
-    public ArrayList<Debt> getAllDebt() {
-        return new ArrayList<>(AVAILABLE_DEBTS);
+    public HashMap<UserPair,Debt> getAllDebt() {
+        return new HashMap<UserPair,Debt>(AVAILABLE_DEBTS);
     }
 
     @Override
     public ArrayList<Debt> getDebtByDebtor(User debtor) {
-        ArrayList<Debt> d = new ArrayList<>();
-        for(Debt debt:AVAILABLE_DEBTS){
 
-        }
-        return d;
+        return null;
+    }
+
+    @Override
+    public Boolean getUserPair(User debtor,User owner){
+        return AVAILABLE_DEBTS.containsKey(new UserPair(debtor,owner));
     }
 
     @Override

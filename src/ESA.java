@@ -23,7 +23,7 @@ public class ESA {
             inputCommand = inputParser.parseInput(inputString);
             commandResponse = inputCommandProcessor.processInputCommand(inputCommand);
             printer.print(commandResponse.getResponseDescription());
-            if(!commandResponse.getStatus() && commandResponse.getResponseDescription().equals("Process exit successfully")){
+            if(!commandResponse.getStatus() && commandResponse.getResponseDescription().equals("Terminated Successfully")){
                 appRun = false;
             }
         }while(appRun);

@@ -5,7 +5,9 @@ import models.User;
 import repositories.ExpenseRepository;
 import repositories.impl.InMemoryExpenseRepository;
 import repositories.impl.InMemoryUserRepository;
+import services.DebtService;
 import services.ExpenseService;
+import services.UserService;
 import services.impl.UserServiceImpl;
 import utils.ExpenseDataValidator;
 import utils.impl.ExpenseIdGenerator;
@@ -17,7 +19,8 @@ import java.util.Scanner;
 
 public class ExpenseServiceImpl implements ExpenseService {
 
-    UserServiceImpl userServiceImpl = new UserServiceImpl();
+    UserService userService = new UserServiceImpl();
+    DebtService debtService = new DebtServiceImpl();
     ExpenseDataValidator expenseDataValidator;
     ExpenseRepository expenseRepository;
 
@@ -36,7 +39,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         ArrayList<User> expenseUsers = new ArrayList<User>();
         Boolean isUserPresentInDatabase = true;
         for(String user: expenseUserIds){
-            Optional<User> expenseUser = userServiceImpl.getUserById(Integer.parseInt(user));
+            Optional<User> expenseUser = userService.getUserById(Integer.parseInt(user));
             if(expenseUser.isPresent()){
                 User sharedUser = expenseUser.get();
                 expenseUsers.add(sharedUser);
@@ -45,7 +48,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                 break;
             }
         }
-        Optional<User> expenseUser = userServiceImpl.getUserById(Integer.parseInt(payerId));
+        Optional<User> expenseUser = userService.getUserById(Integer.parseInt(payerId));
         User payerUser = null;
         if(expenseUser.isPresent()){
             payerUser = expenseUser.get();
@@ -57,6 +60,7 @@ public class ExpenseServiceImpl implements ExpenseService {
             Integer generatedId = ExpenseIdGenerator.getUniqueId();
             Expenditure expenditure = new Expenditure(generatedId, desc, cost,expenseUsers,payerUser);
             expenseRepository.addExpenseInDatabase(expenditure);
+            debtService.addExpenseDebt(cost,expenseUsers,payerUser);
             return generatedId;
         }
         return null;

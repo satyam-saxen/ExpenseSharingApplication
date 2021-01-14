@@ -41,7 +41,7 @@ public class InputCommandProcessor {
             EditExpense editExpense = (EditExpense)inputCommand;
             Expenditure expenditure = expenseService.updateExpense(editExpense.getId(), editExpense.getDesc(), editExpense.getCost(), editExpense.getExpenseUsers(), editExpense.getPayer());
         }else if(inputCommand instanceof Exit){
-            new CommandResponse("Process exit successfully",false);
+            new CommandResponse("Terminated Successfully",false);
         }
         return commandResponse;
     }
