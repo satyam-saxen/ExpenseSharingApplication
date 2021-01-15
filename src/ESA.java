@@ -1,58 +1,32 @@
-import java.lang.reflect.MalformedParameterizedTypeException;
-import java.util.Map;
-import java.util.Scanner;
+import commands.CommandResponse;
+import commands.InputCommand;
+import io.Reader;
+import io.impl.ConsolePrinter;
+import io.InputParser;
+import io.Printable;
+import io.impl.ConsoleReader;
+import services.InputCommandProcessor;
 
 public class ESA {
 
     Boolean appRun = true;
-    Validator inputValidator = new InputValidator();
-    Menu menu = new Menu();
     Printable printer = new ConsolePrinter();
-    UserAction userAction = new UserAction();
-    String error = "Some error occured, please try again";
+    InputParser inputParser = new InputParser();
+    Reader reader = new ConsoleReader();
+    InputCommand inputCommand;
+    CommandResponse commandResponse;
+    InputCommandProcessor inputCommandProcessor = new InputCommandProcessor();
     public void run(){
 
         do{
-            String availabelOptions = menu.getMenu();
-            printer.print(availabelOptions);
-            String action = menu.getAction();
-            if(inputValidator.validate(action)){
-                char actionMode = action.charAt(0);
-                performAction(actionMode);
-            }else{
-                printer.print(error);
-            }
-            printer.print("");
-
-        }while(appRun);
-    }
-
-    private void performAction(char action){
-        switch (action){
-            case '1':
-                userAction.registerUser();
-                break;
-            case '2':
-                userAction.displayAllUser();
-                break;
-            case '3':
-                userAction.updateUser();
-                break;
-            case '4':
-                break;
-            case '5':
-                break;
-            case '6':
-                break;
-            case '7':
-                break;
-            case '8':
-                break;
-            case '9':
+            String inputString = reader.read();
+            inputCommand = inputParser.parseInput(inputString);
+            commandResponse = inputCommandProcessor.processInputCommand(inputCommand);
+            printer.print(commandResponse.getResponseDescription());
+            if(commandResponse.getResponseDescription().equals("Terminated Successfully")){
                 appRun = false;
-                break;
-
-        }
+            }
+        }while(appRun);
     }
 
 }

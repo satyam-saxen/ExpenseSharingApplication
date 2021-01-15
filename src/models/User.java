@@ -1,10 +1,12 @@
+package models;
+
 public class User {
-    private Integer id;
+    private final Integer id;
     private String name;
     private String phoneNumber;
 
-    public User(String name, String phoneNumber) {
-        this.id = UserIdGenerator.getUniqueId();
+    public User(Integer id,String name, String phoneNumber) {
+        this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
