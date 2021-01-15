@@ -34,7 +34,8 @@ public class OutputParser {
             outputString = "No expense added";
         }else{
             for(Expenditure expenditure:expenditures.values()){
-                outputString += expenditure.getId().toString() + " " + expenditure.getDesc() + " " + expenditure.getCost() +"\n";
+                outputString += expenditure.getId().toString() + " " + expenditure.getDesc() + " " + expenditure.getCost() +
+                        expenditure.getExpenseUsers().size() + expenditure.getPayer().getName()+"\n";
             }
         }
         commandResponse.setStatus(true);
@@ -48,7 +49,7 @@ public class OutputParser {
             outputString += "No expenditure added for showing debt record";
         }else{
             for(Debt debt: debts.values()){
-                outputString += debt.getUserPair().toString() + " " + debt.getCost() + "\n";
+                outputString += debt.getUserPair().getDebtor().getName() + " " +debt.getUserPair().getOwner().getName() +" " + debt.getCost() + "\n";
             }
         }
         commandResponse.setStatus(true);

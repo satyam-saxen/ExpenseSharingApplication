@@ -56,7 +56,6 @@ public class ExpenseServiceImpl implements ExpenseService {
         User payerUser = null;
         if(expenseUser.isPresent()){
             payerUser = expenseUser.get();
-            expenseUsers.add(payerUser);
         }else{
             isUserPresentInDatabase = false;
         }

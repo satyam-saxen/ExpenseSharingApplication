@@ -18,13 +18,18 @@ public class DebtServiceImpl implements DebtService {
     public Boolean addExpenseDebt(double cost,ArrayList<User> expenseUsers, User payer) {
         int userCount = expenseUsers.size();
         double perHeadCost = getCostPerHead(cost,userCount);
+        System.out.println("Per Head Cost "+perHeadCost);
         for(User currentUser: expenseUsers){
-            if(!currentUser.equals(payer)){
+            if(!currentUser.getId().equals(payer.getId())){
                 UserPair userPair = new UserPair(currentUser,payer);
                 if(!debtRepository.getUserPair(currentUser,payer) && !debtRepository.getUserPair(payer,currentUser)){
                     debtRepository.addDebtDetail(new Debt(userPair,perHeadCost));
                 }else if(debtRepository.getUserPair(currentUser,payer)){
+                    System.out.println("1");
                     debtRepository.updateDebtDetail(new Debt(userPair,perHeadCost));
+                }else if(debtRepository.getUserPair(payer,currentUser)){
+                    debtRepository.updateDebtDetail(new Debt(userPair,-perHeadCost));
+                    System.out.println("2");
                 }
             }
         }

@@ -8,4 +8,12 @@ public class UserPair {
         this.debtor = debtor;
         this.owner = owner;
     }
+
+    public User getDebtor() {
+        return debtor;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
 }

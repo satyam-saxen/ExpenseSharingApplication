@@ -19,7 +19,10 @@ public class InMemoryDebtRepository implements DebtRepository {
     }
 
     public void updateDebtDetail(Debt debt){
-        AVAILABLE_DEBTS.get(debt.getUserPair()).setCost(debt.getCost());
+        double previousCost = AVAILABLE_DEBTS.get(debt.getUserPair()).getCost();
+        double modifiedCost = debt.getCost() + previousCost;
+        System.out.println("Change in cost "+previousCost + " " + modifiedCost);
+        AVAILABLE_DEBTS.get(debt.getUserPair()).setCost(modifiedCost);
     }
 
     @Override
@@ -35,7 +38,8 @@ public class InMemoryDebtRepository implements DebtRepository {
 
     @Override
     public Boolean getUserPair(User debtor,User owner){
-        return AVAILABLE_DEBTS.containsKey(new UserPair(debtor,owner));
+        Debt debt = AVAILABLE_DEBTS.get(new UserPair(debtor,owner));
+        return debt != null;
     }
 
     @Override
