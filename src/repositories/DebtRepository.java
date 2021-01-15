@@ -12,7 +12,7 @@ public interface DebtRepository {
     Boolean addDebtDetail(Debt debt);
     Map<UserPair,Debt> getAllDebt();
     Boolean getUserPair(User debtor,User owner);
-    void updateDebtDetail(Debt debt);
+    void updateDebtDetail(User debtor,User payer,double perHeadCost);
     ArrayList<Debt> getDebtByDebtor(User debtor);
     ArrayList<Debt> getDebtByOwner(User owner);
 }

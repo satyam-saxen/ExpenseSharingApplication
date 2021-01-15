@@ -26,9 +26,9 @@ public class DebtServiceImpl implements DebtService {
                     debtRepository.addDebtDetail(new Debt(userPair,perHeadCost));
                 }else if(debtRepository.getUserPair(currentUser,payer)){
                     System.out.println("1");
-                    debtRepository.updateDebtDetail(new Debt(userPair,perHeadCost));
+                    debtRepository.updateDebtDetail(currentUser,payer,perHeadCost);
                 }else if(debtRepository.getUserPair(payer,currentUser)){
-                    debtRepository.updateDebtDetail(new Debt(userPair,-perHeadCost));
+                    debtRepository.updateDebtDetail(payer,currentUser,-perHeadCost);
                     System.out.println("2");
                 }
             }

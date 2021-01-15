@@ -18,11 +18,15 @@ public class InMemoryDebtRepository implements DebtRepository {
         return AVAILABLE_DEBTS.containsKey(debt.getUserPair());
     }
 
-    public void updateDebtDetail(Debt debt){
-        double previousCost = AVAILABLE_DEBTS.get(debt.getUserPair()).getCost();
-        double modifiedCost = debt.getCost() + previousCost;
-        System.out.println("Change in cost "+previousCost + " " + modifiedCost);
-        AVAILABLE_DEBTS.get(debt.getUserPair()).setCost(modifiedCost);
+    public void updateDebtDetail(User debtor,User payer,double perHeadCost){
+        for(UserPair userPair:AVAILABLE_DEBTS.keySet()){
+            if(userPair.getDebtor().getId().equals(debtor.getId()) && userPair.getOwner().getId().equals(payer.getId())){
+                double previousCost = AVAILABLE_DEBTS.get(userPair).getCost();
+                double modifiedCost = perHeadCost + previousCost;
+                System.out.println("Change in cost "+previousCost + " " + modifiedCost);
+                AVAILABLE_DEBTS.get(userPair).setCost(modifiedCost);
+            }
+        }
     }
 
     @Override
@@ -38,8 +42,12 @@ public class InMemoryDebtRepository implements DebtRepository {
 
     @Override
     public Boolean getUserPair(User debtor,User owner){
-        Debt debt = AVAILABLE_DEBTS.get(new UserPair(debtor,owner));
-        return debt != null;
+        for(UserPair userPair: AVAILABLE_DEBTS.keySet()){
+            if(userPair.getDebtor().getId().equals(debtor.getId()) && userPair.getOwner().getId().equals(owner.getId())){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
